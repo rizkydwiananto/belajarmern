@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Link } from "react-router-dom";
@@ -12,7 +11,7 @@ export default function Button(props) {
   if (props.hasShadow) className.push("btn-shadow");
 
   const onCLick = () => {
-    if (props.onClick) props.onCLick();
+    if (props.onClick) props.onClick();
   };
 
   if (props.isDisabled || props.isLoading) {
@@ -50,7 +49,7 @@ export default function Button(props) {
           to={props.href}
           className={className.join(" ")}
           style={props.style}
-          onClick={onClick}
+          onClick={onCLick}
         >
           {props.children}
         </Link>
@@ -62,7 +61,7 @@ export default function Button(props) {
     <button
       className={className.join(" ")}
       style={props.style}
-      onClick={onClick}
+      onClick={onCLick}
     >
       {props.children}
     </button>
@@ -71,10 +70,11 @@ export default function Button(props) {
 
 Button.prototype = {
   type: propTypes.oneOf(["button", "link"]),
-  onClick: propTypes.func,
+  onCLick: propTypes.func,
   href: propTypes.string,
   target: propTypes.string,
   className: propTypes.string,
+  isPrimary: propTypes.bool,
   isDisabled: propTypes.bool,
   isLoading: propTypes.bool,
   isSmall: propTypes.bool,
